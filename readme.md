@@ -30,3 +30,6 @@ The mongodb database is run from a docker image to make it all work consistently
 To monitor what the browser front end and server backend are doing with the dB, I have setup a mongo-express client
 that also connects to the mongodb dB and displays the contents of a simple collection called 'users'.
 mongo-express is also run from a docker image that has been configured with appropriate port and environment details.
+
+The next bit of fun is to create a docker image of the node.js based server so anyone 
+can install it and experiment regardless of platform.
