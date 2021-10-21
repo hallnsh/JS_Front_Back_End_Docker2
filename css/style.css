@@ -1,0 +1,71 @@
+/* 1h31m14s into tutorial Color the background of the page gray */
+body {
+    
+    background: rgba(139, 139, 156, .6);
+    background: radial-gradient(lightblue, grey);
+}
+
+.container {
+    
+    background: rgba(82, 82, 114, 0.6);
+    background: radial-gradient(lightblue, grey);
+}
+
+/* this removes the display of the container-edit class object */
+.container-edit {
+    display: none;
+    background: rgba(139, 139, 156, .6);
+    background: radial-gradient(lightblue, grey);
+
+}
+#title {
+    color: rgb(212, 160, 26);
+}
+
+.subtitle {
+    color: rgb(228, 166, 10);
+}
+
+.justified {
+    text-transform: uppercase ;
+    text-align: justify;
+    font-family: Arial, sans-serif;
+}
+.inline {
+    
+    font-weight: 800;
+    font-style: oblique;
+    text-decoration: underline double yellow;
+}
+
+a:hover {
+    color: red;
+}
+
+h3:hover{
+    color: blue;
+}
+/* CHANGES TO RED WHEN YOU HOVER OVER */
+
+#input-name:hover{
+    color:red;
+}
+#input-email:hover{
+    color:red;
+}
+#input-interests:hover{
+    color:red;
+}
+
+h2:hover {
+    color: red;
+}
+/* this sets the borders to be rounded for images */
+img {
+    border-radius: 20px;
+}
+/* This sets the outline of the active image to red when you hover over it */
+.active_img:hover {
+    border: 2px solid red; 
+    outline-offset: 1px;
+}

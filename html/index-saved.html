@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--
+    <link rel="stylesheet" href="../CSS/style.css">
+    -->
+    
+    <link rel="stylesheet" type="text/css" href="../CSS/style.css">
+    <link rel="shortcut icon" href="">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- The script just implements the 2 javascript functions 'saveProfile() and editProfile()'-->
+    <script type="application/javascript" src="../js/edit_save.js"></script> 
+
+    <div class="container">
+        <h1 id="header">User Profile</h1>
+        <img src="../img/pic01.jpg" alt="Pic of Nick with MR-2" width="273" height="194" class="inactive_img">
+        <br>
+        Name: <h3 id="name">Nick Hall</h3>
+        <hr>
+        Email: <h3 id="email">n.s.h.hall@bham.ac.uk</h3>
+        <hr>
+        Interests: <h3 id="interests">Fixing things!</h3>
+        <hr>
+        <button class="button" onclick="editProfile()">Edit Profile</button>
+    </div>
+
+    <div class="container-edit">
+        <h1 id="header">Edit User Profile</h1>
+        <img src="../img/pic01.jpg" alt="Pic of Nick with MR-2" width="273" height="194" class="active_img">
+        <br>
+        <br>
+        Name:      <input id="input-name" type="text" />
+        <br>
+        <br>
+        <hr>
+        Email:     <input id="input-email" type="email">
+        <br>
+        <br>
+
+        <hr>
+        Interests: <input id="input-interests" type="text">
+        <br>
+        <br>
+        <hr>
+        <button class="button" onclick="saveProfile()">Save profile</button>
+    </div>
+</body>
+</html>
