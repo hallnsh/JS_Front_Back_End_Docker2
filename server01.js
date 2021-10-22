@@ -50,6 +50,9 @@ app.get('/icons/myicon.png', function(req, res) {
     res.sendFile(path.join(__dirname + '/icons/myicon.png'));
 });
 // ------------------------------------------------------------------------------------------------
+// This is an api route to respond to the URL /get-profile sent by the browser, it interogates 
+// the mongo-db and sends back the body retrieved as a bunch of JSON. It sends this to the console
+// just so that you can correlate what the server is doing with what the browser is recieving.
 // ------------------------------------------------------------------------------------------------
 app.get('/get-profile', function (req, res) {
     var response = res;
@@ -118,6 +121,9 @@ app.get('/profile-picture', function(req, res) {
 
 });
 // ------------------------------------------------------------------------------------------------
+// THe compnonet that 'Listens' on port and hostname given. Note the different quotes here, on an 
+// XPS-15 keyboard these quotes are those to the immediate left of the "1" key NOT the ones under 
+// the @ key.
 // ------------------------------------------------------------------------------------------------
 app.listen(port_number, host_name, function () {
     console.log(`This line is FFFreaky Node Server running on http://${host_name}:${port_number}/`);
