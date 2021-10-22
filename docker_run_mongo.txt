@@ -1,10 +1,16 @@
+// THis is how to setup the runtime containers for the docker images of
+// mongo db and mongo express.
+// You can put this lot in a .yml file and use docker compose to manage the lot.
+// if you do that you won't need to setup the mongo-network.
+//
+// This lot assumes you have a bash or similar Linux type shell open...
 
 // First create the mongo network
 
 docker network create mongo-network
-
-// TO run mongodb from bash command line...
-
+// ------------------------------------------------------------------------------
+// TO run mongodb from bash command line in a structured manner...
+// ------------------------------------------------------------------------------
 docker run -d \
 -p27017:27017 \
 -e MONGO_INITDB_ROOT_USERNAME=admin \
@@ -13,12 +19,14 @@ docker run -d \
 --name mongodb \
 mongo
 
+// Or if you have no patience to blast it off in one go...
 
 
 docker run -d -p27017:27017 -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=password --network mongo-network --name mongodb mongo
 
-// TO run mongo-express from bash command line...
-
+// ------------------------------------------------------------------------------
+// TO run mongo-express from bash command line in a structured manner...
+// ------------------------------------------------------------------------------
 docker run -d \
 -p8081:8081 \
 -e ME_CONFIG_MONGODB_ADMINUSERNAME=admin \
@@ -28,5 +36,7 @@ docker run -d \
 --network mongo-network \
 --name mongo-express \
 mongo-express
-
+// ------------------------------------------------------------------------------
+// Or if you have no patience blast it off in one go with ...
+// ------------------------------------------------------------------------------
 docker run -d -p8081:8081 -e ME_CONFIG_MONGODB_ADMINUSERNAME=admin -e ME_CONFIG_MONGODB_ADMINPASSWORD=password -e ME_CONFIG_MONGODB_SERVER=mongodb -e useUnifiedTopology=true --network mongo-network --name mongo-express mongo-express
