@@ -2,12 +2,16 @@
 var express = require('express');
 var path = require('path');
 var fs = require('fs');
+const global_id_counter = 0;
 const { SSL_OP_TLS_ROLLBACK_BUG } = require('constants');
 
 var MongoClient = require('mongodb').MongoClient;
 var bodyParser = require('body-parser');
 const { url } = require('inspector');
+const { ObjectId } = require('bson');
+const { query } = require('express');
 var app = express();
+var global_userid;
 
 var host_name = '127.0.0.1';
 var port_number = 3000;
@@ -18,13 +22,14 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
-// Define the routes to get the required resources for the browser,
-// These are the header functions that respond when specific URLs are hit either 
-// automatically by the browser or by user entry.
-// You do this first get.. and then the browser discovers from index.html that
-// it needs: style.css, pic01.jpg and edit_save.js which it gets by initiating
-// its own get requests these are the three that follow the initial get. Phew!!!
-
+/*------------------------------------------------------------------------------------------------
+   Define the routes to get the required resources for the browser,
+   These are the header functions that respond when specific URLs are hit either 
+   automatically by the browser or by user entry.
+   You do this first get.. and then the browser discovers from index.html that
+   it needs: style.css, pic01.jpg and edit_save.js which it gets by initiating
+   its own get requests these are the three that follow the initial get. Phew!!!
+------------------------------------------------------------------------------------------------*/
 app.get('/', function(req, res) {
     console.log('path[',path.join(__dirname, '/html/index.html'),']');
     res.sendFile(path.join(__dirname, '/html/index.html'));
@@ -56,23 +61,33 @@ app.get('/icons/myicon.png', function(req, res) {
 // ------------------------------------------------------------------------------------------------
 app.get('/get-profile', function (req, res) {
     var response = res;
-    var userObj = req.body;
-    console.log('The user object received from client', userObj);
+    var userObj = JSON.stringify(req.query);
+    let query = JSON.parse(userObj);
 
-    MongoClient.connect('mongodb://admin:password@localhost:27017', function (err, client) {
-        if (err) {
+    console.log('-----------------------in app.get--------------------------------')
+    console.log('The user object received from client', JSON.parse(userObj));
+
+
+    query = JSON.parse(userObj);
+
+    MongoClient.connect('mongodb://admin:password@localhost:27017', function (err, client) 
+    {
+        if (err) 
+        {
             console.log('Error in /get-profile');
             throw err;                          // this is quick and dirty at the moment because there aint a catch block
         }
-        console.log('Connecting to the database');
+        console.log('Connecting to the database with search token = ', query);
 
         var db = client.db('user-account');
-        var query = {userid: 1};
 
-        db.collection('users').findOne(query, function (err, result) {
+        db.collection('users').findOne(query, function (err, result) 
+        {
             if (err) throw err;
             client.close();
-                    console.log(result);
+                    console.log('This is the result =', result);
+                    console.log('this is result.userid =',result.userid);
+                    global_userid = result.userid;
             response.send(result);
         });
     })
@@ -84,26 +99,39 @@ app.post('/update-profile', function (req, res) {
     var response = res;
 
     // userObj is the object that gets transferred from the client 
+    console.log('-----------------------in app.post--------------------------------')
     console.log('Connecting to the database WITH',userObj);
 
-    MongoClient.connect('mongodb://admin:password@localhost:27017', function (err, client) {
-        if (err) {
+    MongoClient.connect('mongodb://admin:password@localhost:27017', function (err, client) 
+    {
+        if (err) 
+        {
             console.log('Error in /update-profile <<<<<<<<<<>>>>>>>>>>>>>>');
-            throw err;                          // this is quick and dirty at the moment because there aint a catch block
+            // this is quick and dirty at the moment because there aint a catch block
+            throw err; 
         }               
         
+        console.log('userObj.name=',userObj.name);
+        console.log('global_userid =',global_userid);
+
         var db = client.db('user-account');
-        userObj['userid'] = 5;
-        var query = {userid: 5};
+        userObj['userid'] = global_userid;
+        var query = {userid: global_userid};
         var newValues = { $set: userObj };
 
-        console.log('Successfully connected to the user-account database');
-        db.collection('users').findOne(query, function (err, result) {
+        // this is the query to get the data item from the db if it exists
+        console.log('Successfully connected to the user-account database with query =',query);
+        db.collection('users').findOne(query, function (err, result) 
+        {
             if (err) throw err;
                 console.log(result);
         });
-        db.collection('users').updateOne(query, newValues, {upsert: true}, function (err, res) {
-            if (err) throw err;                  // this is quick and dirty at the moment because there aint a catch block
+
+        // This is the query to upsert the contents of the item found above. The term upsert is update/insert.
+        db.collection('users').updateOne(query, newValues, {upsert: true}, function (err, res) 
+        {
+            // this is quick and dirty at the moment because there aint a catch block
+            if (err) throw err;
             console.log('Successfully updated or inserted the item');
             client.close();
                 console.log(userObj);   

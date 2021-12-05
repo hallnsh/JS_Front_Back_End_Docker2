@@ -1,5 +1,5 @@
-# Python Hack to generate primes
-## Subtitle  Experiments with Lists and simple i/o
+# JavaScript Hack to implement simple front and Backend experiment using Docker containers
+## Subtitle  Experiments with Node JS, Express, JSON and Mongodb
 
 Nick name is Nico
 
@@ -16,7 +16,7 @@ but illustrates how to achieve persistence, the content is used to update the fi
 Install Node.js and Express and then run the server with
 node server01
 
-There is some not too friendly console logs to show whats going on when the front end
+There are some not too friendly console logs to show whats going on when the front end
 browser tries to talk to it.
 
 The front end code consists of a (very) simple 

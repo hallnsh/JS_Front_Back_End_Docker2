@@ -17,10 +17,11 @@
     <script type="application/javascript" src="../js/edit_save.js"></script>
 
     <div class="container">
-        <h1 id="header">User Profile</h1>
+        <h1 id="header">Current User Profile</h1>
         <img src="../img/pic01.jpg" alt="Pic of Nick with MR-2" width="273" height="194" class="inactive_img">
         <br>
         Name: <h3 id="name">Nick Hall</h3>
+        <button class="button" onclick="searchname()">New Name</button>
         <hr>
         Email: <h3 id="email">n.s.h.hall@bham.ac.uk</h3>
         <hr>
@@ -48,6 +49,8 @@
         <br>
         <hr>
         <button class="button" onclick="saveProfile()">Save profile</button>
+        <button class="button" onclick="cancelButton()">Cancel</button>
+        
     </div>
 </body>
 </html>

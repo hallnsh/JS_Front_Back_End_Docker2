@@ -10,7 +10,13 @@ body {
     background: rgba(82, 82, 114, 0.6);
     background: radial-gradient(lightblue, grey);
 }
-
+.button {
+    background: gray;
+}
+.button:hover {
+    
+    background: greenyellow;
+}
 /* this removes the display of the container-edit class object */
 .container-edit {
     display: none;
