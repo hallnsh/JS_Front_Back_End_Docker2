@@ -127,7 +127,7 @@ function ajax_post(url, stringed_jdata) {
 
 }
 // ----------------------------------------------------------------------------------------------------
-// dont forget this AJAX shit is ASYNCHRONOUS so you cant just return values in the normal way,
+// dont forget this AJAX is ASYNCHRONOUS so you cant just return values in the normal way,
 // you will just get undefined at the calling module because the code will have executed and returned
 // before any values get set.
 //
