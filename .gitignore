@@ -1,3 +1,7 @@
+# A few experimental containers we don't want to include
+docker_container_Postgres.txt
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
